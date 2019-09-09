@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.GroundMapper">
+	<select id="GroundCheck" parameterType="Ground" resultType="Ground">
+		select * from groundres where ResDate=#{ResDate}
+	</select>
+	
+	<insert id="GroundRes" parameterType="Ground">
+		insert into groundres(ResDate,Time1,Time2,Time3,Time4,Time5,ResId,ResState)
+		values(#{ResDate},#{Time1},#{Time2},#{Time3},#{Time4},#{Time5},#{ResId},"예약대기")
+			on duplicate key update
+			<if test="Time1!=null and Time1!=''">Time1=#{Time1}</if>
+			<if test="Time2!=null and Time2!=''">Time2=#{Time2}</if>
+			<if test="Time3!=null and Time3!=''">Time3=#{Time3}</if>
+			<if test="Time4!=null and Time4!=''">Time4=#{Time4}</if>
+			<if test="Time5!=null and Time5!=''">Time5=#{Time5}</if>
+			
+	</insert>
+	
+</mapper>

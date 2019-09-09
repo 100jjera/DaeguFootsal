@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+
+<configuration>
+
+	<typeAliases>		
+		<!-- 
+		<typeAlias type="com.spring.project.footsalUser" alias="User"></typeAlias>
+		 -->
+		 <typeAlias type="com.spring.project.User.FootballUser" alias="User"></typeAlias>
+		 <typeAlias type="com.spring.project.Matching.FootballMatching" alias="Matching"></typeAlias>
+		 <typeAlias type="com.spring.project.Guest.FootballGuest" alias="Guest"></typeAlias>
+		 <typeAlias type="com.spring.project.Community.FootballCommunity" alias="Community"></typeAlias>
+		 <typeAlias type="com.spring.project.Info.FootballInfo" alias="Info"></typeAlias>
+		 <typeAlias type="com.spring.project.Ground.FootballGround" alias="Ground"></typeAlias>
+	</typeAliases>
+
+</configuration>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.CommunityMapper">
+	
+	<select id="CommunityPost" parameterType="Community" resultType="Community">
+		select * from Community  <include refid="search"></include> order by num desc
+		LIMIT ${startIndex}, ${cntPerPage};
+	</select>
+	<select id="CommunityPostCnt" parameterType="Community" resultType="Integer">
+		select count(*) from Community <include refid="search"></include> order by num desc;
+	</select>
+	
+	
+	<select id="CommunityPost2" parameterType="Community" resultType="Community">
+		select * from community order by num desc LIMIT 3;
+	</select>
+	<insert id="upload" parameterType="Community">
+		insert into community(id,title,content) values(#{id},#{title},#{content})
+	</insert>
+	
+	<select id="CommunityContent" parameterType="Community" resultType="Community">
+		select * from community where num=#{num};
+	
+	</select>
+	<update id="updateViewCnt">
+		update community set viewcnt=viewcnt+1 where num=#{num};
+	
+	</update>
+	
+
+	<sql id="search">
+		<choose>
+		<when test="searchOption.equals('all')">
+			where id like concat ('%',#{keyword},'%')
+			or content like concat ('%',#{keyword},'%')
+			or title like concat ('%',#{keyword},'%')
+		</when>
+		<when test="!searchOption.equals('')">
+			where ${searchOption} like concat ('%',#{keyword},'%')
+		</when>
+		<otherwise>
+			
+		</otherwise>
+		</choose>
+	</sql>
+		
+	<update id="update" parameterType="Community">
+		update community 
+		<set>
+			<if test="title!=null and title!=''">title=#{title}</if>,
+			<if test="content!=null and content!=''">content=#{content}</if>
+			
+		</set> 
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="Community">
+	delete from community where num=#{num}
+	</delete>
+</mapper>

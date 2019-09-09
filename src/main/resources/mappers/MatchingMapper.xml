@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.MatchingMapper">
+	
+	<select id="MatchingPost" parameterType="Matching" resultType="Matching">
+		select * from matching  <include refid="search"></include> order by num desc
+		LIMIT ${startIndex}, ${cntPerPage};
+	</select>
+	<select id="MatchingPostCnt" parameterType="Matching" resultType="Integer">
+		select count(*) from matching <include refid="search"></include> order by num desc;
+	</select>
+	<select id="MatchingPost2" parameterType="Matching" resultType="Matching">
+		select * from matching  order by num desc LIMIT 3;
+	</select>
+	
+	
+	<sql id="search">
+		<choose>
+		<when test="searchOption.equals('all')">
+			where id like concat ('%',#{keyword},'%')
+			or content like concat ('%',#{keyword},'%')
+			or title like concat ('%',#{keyword},'%')
+		</when>
+		<when test="!searchOption.equals('')">
+			where ${searchOption} like concat ('%',#{keyword},'%')
+		</when>
+		<otherwise>
+			
+		</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="MatchingSearchCnt" resultType="Integer">
+		select count(*) from matching <include refid="search" />
+	</select>
+	
+	<insert id="upload" parameterType="Matching">
+		insert into matching(id,title,content) values(#{id},#{title},#{content})
+	</insert>
+	
+	<select id="MatchingContent" parameterType="Matching" resultType="Matching">
+		select * from matching where num=#{num};
+	
+	</select>
+	<update id="updateViewCnt">
+		update matching set viewcnt=viewcnt+1 where num=#{num};
+	
+	</update>
+	
+	
+	<update id="update" parameterType="Matching">
+		update matching 
+		<set>
+			<if test="title!=null and title!=''">title=#{title}</if>,
+			<if test="content!=null and content!=''">content=#{content}</if>
+			
+		</set> 
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="Matching">
+	delete from matching where num=#{num}
+	</delete>
+</mapper>

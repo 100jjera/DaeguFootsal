@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.GuestMapper">
+<select id="GuestPost" parameterType="Guest" resultType="Guest">
+		select * from Guest  <include refid="search"></include> order by num desc
+		LIMIT ${startIndex}, ${cntPerPage};
+	</select>
+	<select id="GuestPostCnt" parameterType="Guest" resultType="Integer">
+		select count(*) from Guest <include refid="search"></include> order by num desc;
+	</select>
+	
+	
+	<select id="GuestPost2" parameterType="Guest" resultType="Guest">
+		select * from Guest order by num desc LIMIT 3;
+	</select>
+	<insert id="upload" parameterType="Guest">
+		insert into Guest(id,title,content) values(#{id},#{title},#{content})
+	</insert>
+	
+	<select id="GuestContent" parameterType="Guest" resultType="Guest">
+		select * from Guest where num=#{num};
+	
+	</select>
+	<update id="updateViewCnt">
+		update Guest set viewcnt=viewcnt+1 where num=#{num};
+	
+	</update>
+	
+
+	<sql id="search">
+		<choose>
+		<when test="searchOption.equals('all')">
+			where id like concat ('%',#{keyword},'%')
+			or content like concat ('%',#{keyword},'%')
+			or title like concat ('%',#{keyword},'%')
+		</when>
+		<when test="!searchOption.equals('')">
+			where ${searchOption} like concat ('%',#{keyword},'%')
+		</when>
+		<otherwise>
+			
+		</otherwise>
+		</choose>
+	</sql>
+		
+	<update id="update" parameterType="Guest">
+		update Guest 
+		<set>
+			<if test="title!=null and title!=''">title=#{title}</if>,
+			<if test="content!=null and content!=''">content=#{content}</if>
+			
+		</set> 
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="Guest">
+	delete from Guest where num=#{num}
+	</delete>
+</mapper>

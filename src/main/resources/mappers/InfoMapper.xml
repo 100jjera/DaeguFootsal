@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.project.InfoMapper">
+<select id="InfoPost" parameterType="Info" resultType="Info">
+		select * from Info  <include refid="search"></include> order by num desc
+		LIMIT ${startIndex}, ${cntPerPage};
+	</select>
+	<select id="InfoPostCnt" parameterType="Info" resultType="Integer">
+		select count(*) from Info <include refid="search"></include> order by num desc;
+	</select>
+	
+	
+	<select id="InfoPost2" parameterType="Info" resultType="Info">
+		select * from Info order by num desc LIMIT 3;
+	</select>
+	<insert id="upload" parameterType="Info">
+		insert into Info(id,title,content) values(#{id},#{title},#{content})
+	</insert>
+	
+	<select id="InfoContent" parameterType="Info" resultType="Info">
+		select * from Info where num=#{num};
+	
+	</select>
+	<update id="updateViewCnt">
+		update Info set viewcnt=viewcnt+1 where num=#{num};
+	
+	</update>
+	
+
+	<sql id="search">
+		<choose>
+		<when test="searchOption.equals('all')">
+			where id like concat ('%',#{keyword},'%')
+			or content like concat ('%',#{keyword},'%')
+			or title like concat ('%',#{keyword},'%')
+		</when>
+		<when test="!searchOption.equals('')">
+			where ${searchOption} like concat ('%',#{keyword},'%')
+		</when>
+		<otherwise>
+			
+		</otherwise>
+		</choose>
+	</sql>
+		
+	<update id="update" parameterType="Info">
+		update Info 
+		<set>
+			<if test="title!=null and title!=''">title=#{title}</if>,
+			<if test="content!=null and content!=''">content=#{content}</if>
+			
+		</set> 
+		where num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="Info">
+	delete from Info where num=#{num}
+	</delete>
+</mapper>
