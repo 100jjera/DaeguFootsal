@@ -86,7 +86,7 @@ public class CommunityController {
 //		
 //	
 //		if(id==null||id==""||title==null||title==""||content=="null"||content=="") {
-//			throw new Exception("데이터를 입력하세요");
+//			throw new Exception("");
 //		}
 //		else {
 //			Community.setId(id);

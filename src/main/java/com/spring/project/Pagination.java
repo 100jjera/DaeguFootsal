@@ -2,40 +2,40 @@ package com.spring.project;
 
 public class Pagination {
     
-    /** ÇÑ ÆäÀÌÁö´ç °Ô½Ã±Û ¼ö **/
+    /** ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ **/
     private int pageSize = 10;
     
-    /** ÇÑ ºí·°(range)´ç ÆäÀÌÁö ¼ö **/
+    /** ï¿½ï¿½ ï¿½ï¿½(range)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ **/
     private int rangeSize = 10;
     
-    /** ÇöÀç ÆäÀÌÁö **/
+    /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
     private int curPage = 1;
     
-    /** ÇöÀç ºí·°(range) **/
+    /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(range) **/
     private int curRange = 1;
     
-    /** ÃÑ °Ô½Ã±Û ¼ö **/
+    /** ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ **/
     private int listCnt;
     
-    /** ÃÑ ÆäÀÌÁö ¼ö **/
+    /** ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ **/
     private int pageCnt;
     
-    /** ÃÑ ºí·°(range) ¼ö **/
+    /** ï¿½ï¿½ ï¿½ï¿½(range) ï¿½ï¿½ **/
     private int rangeCnt;
     
-    /** ½ÃÀÛ ÆäÀÌÁö **/
+    /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
     private int startPage = 1;
     
-    /** ³¡ ÆäÀÌÁö **/
+    /** ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
     private int endPage = 1;
     
-    /** ½ÃÀÛ index **/
+    /** ï¿½ï¿½ï¿½ï¿½ index **/
     private int startIndex = 0;
     
-    /** ÀÌÀü ÆäÀÌÁö **/
+    /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
     private int prevPage;
     
-    /** ´ÙÀ½ ÆäÀÌÁö **/
+    /** ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
     private int nextPage;
 
 	public int getPageSize() {
@@ -127,28 +127,16 @@ public class Pagination {
 	
 public Pagination(int listCnt, int curPage){
         
-        /**
-         * ÆäÀÌÂ¡ Ã³¸® ¼ø¼­
-         * 1. ÃÑ ÆäÀÌÁö¼ö
-         * 2. ÃÑ ºí·°(range)¼ö
-         * 3. range setting
-         */
-        
-        // ÃÑ °Ô½Ã¹° ¼ö¿Í ÇöÀç ÆäÀÌÁö¸¦ Controller·Î ºÎÅÍ ¹Ş¾Æ¿Â´Ù.
-        /** ÇöÀçÆäÀÌÁö **/
+
         setCurPage(curPage);
-        /** ÃÑ °Ô½Ã¹° ¼ö **/
+
         setListCnt(listCnt);
-        
-        /** 1. ÃÑ ÆäÀÌÁö ¼ö **/
         setPageCnt(listCnt);
-        /** 2. ÃÑ ºí·°(range)¼ö **/
-        setRangeCnt(pageCnt);
-        /** 3. ºí·°(range) setting **/
-        rangeSetting(curPage);
         
-        /** DB ÁúÀÇ¸¦ À§ÇÑ startIndex ¼³Á¤ **/
-        setStartIndex(curPage);
+        setRangeCnt(pageCnt);
+           rangeSetting(curPage);
+        
+          setStartIndex(curPage);
     }
  
     public void setPageCnt(int listCnt) {
