@@ -77,26 +77,26 @@ public class CommunityController {
 	
 	@RequestMapping(value="/api/Community" ,method = {RequestMethod.POST,RequestMethod.GET})
 	public String apiCommunity(HttpServletRequest request,FootballCommunity Community) throws Exception{
+//		
+//		request.setCharacterEncoding("UTF-8");
+//		String id=request.getParameter("id");
+//		String title=request.getParameter("title");
+//		String content=request.getParameter("content");
+//		
+//		
+//	
+//		if(id==null||id==""||title==null||title==""||content=="null"||content=="") {
+//			throw new Exception("데이터를 입력하세요");
+//		}
+//		else {
+//			Community.setId(id);
+//			Community.setTitle(title);
+//			Community.setContent(content);
+//		}
 		
-		request.setCharacterEncoding("UTF-8");
-		String id=request.getParameter("id");
-		String title=request.getParameter("title");
-		String content=request.getParameter("content");
+		service.upload(Community);
 		
-		
-	
-		if(id==null||id==""||title==null||title==""||content=="null"||content=="") {
-			throw new Exception("데이터를 입력하세요");
-		}
-		else {
-			Community.setId(id);
-			Community.setTitle(title);
-			Community.setContent(content);
-			service.upload(Community);
-			
-			return "redirect:/CommunityForm";
-		}
-		
+		return "redirect:/CommunityForm";
 		
 		
 	}
