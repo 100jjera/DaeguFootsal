@@ -14,10 +14,16 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgres://ec2-174-129-253-125.compute-1.amazonaws.com:5432/dbtgdl31bm92jf" />
+		<property name="username" value="gductmxiufywxh"/>
+		<property name="password" value="fb54cbc14f5b86b9e428867f4f2274200544777107d726ae6008d595acff31dc"/>
+		<!-- 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://218.149.212.105:3306/daegufootsal?serverTimezone=Asia/Seoul " />
+		<property name="url" value="jdbc:mysql://localhost:3306/daegufootsal?serverTimezone=Asia/Seoul " />
 		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
+		 -->
 	</bean>	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
