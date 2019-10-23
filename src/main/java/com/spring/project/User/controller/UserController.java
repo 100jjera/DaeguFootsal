@@ -45,11 +45,11 @@ public class UserController {
 		if(id==null||id==""||password==null||password==""||password2==null||password2==""||name==null||name==""||phoneNum==null||phoneNum==""||birth==null||birth=="")
 		{
 			
-			throw new Exception("데이터를 입력하세요");
+			throw new Exception("insert data");
 		
 		}
 		else if(!password.equals(password2)) {
-			throw new Exception("비밀번호가 일치하지 않습니다.");
+			throw new Exception("insert data.");
 		
 		}
 		else {
