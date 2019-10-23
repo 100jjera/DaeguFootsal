@@ -86,7 +86,7 @@ public class GuestController {
 		
 	
 		if(id==null||id==""||title==null||title==""||content=="null"||content=="") {
-			throw new Exception("데이터를 입력하세요");
+			throw new Exception("insert data");
 		}
 		else {
 			Guest.setId(id);
